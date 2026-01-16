@@ -5,7 +5,7 @@
 struct parse_option {
     char short_opt;           // Short option (e.g., 'v')
     const char *long_opt;     // Long option name (e.g., "verbose")
-    const char *arg_name;     // Name of argument if required (e.g., "COUNT")
+    const char *opt_name;     // Name of argument if required (e.g., "COUNT")
     const char **args_opt;    // Option args array
     const char *description;  // Detailed explanation of the option
     const char *example_case; // Example case for how to use
