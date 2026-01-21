@@ -13,7 +13,7 @@ struct parse_option {
 };
 
 struct parse_options {
-    parse_option* parse_options
-}
+    struct parse_option* parse_options;
+};
 
 #endif
