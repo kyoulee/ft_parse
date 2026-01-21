@@ -24,7 +24,7 @@ int test_parse_help(int argc, char **argv) {
     (void)argv;
     if (argc < 2) {
         print_help(argv[0],description, options);
-        return 0;
+        return -1;
     }
 
     printf("Program is running with %d arguments...\n", argc - 1);
