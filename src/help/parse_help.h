@@ -3,6 +3,6 @@
 
 #include "ft_parse.h"
 
-void print_help(const char *program_name, const char *descript, struct parse_option *opts);
+void print_help(const char *program_name, const char *descript, const struct parse_option *opts);
 
 #endif

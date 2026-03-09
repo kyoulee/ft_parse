@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "ft_parse.h"
+#include "parse_help.h"
 
 /**
  * @brief 명령행 옵션 도움말을 표준 출력으로 출력합니다.
@@ -8,7 +8,7 @@
  * @param descript 프로그램 상세 설명
  * @param opts 옵션 정보 배열
  */
-void print_help(const char *program_name, const char *descript, struct parse_option *opts) {
+void print_help(const char *program_name, const char *descript, const struct parse_option *opts) {
     printf("\033[1mUsage:\033[0m %s [\033[4mOPTION\033[0m...]\n", program_name);
     
     if (descript) {
@@ -27,8 +27,8 @@ void print_help(const char *program_name, const char *descript, struct parse_opt
             sprintf(left_side, "      ");
         }
 
-        if (opts[i].opt_name) {
-            sprintf(opt_buf, "--%s=%s", opts[i].long_opt, opts[i].opt_name);
+        if (opts[i].long_opt) {
+            sprintf(opt_buf, "--%s=%s", opts[i].long_opt, opts[i].long_opt);
         } else {
             sprintf(opt_buf, "--%s", opts[i].long_opt);
         }
@@ -40,7 +40,6 @@ void print_help(const char *program_name, const char *descript, struct parse_opt
             printf("%-32s \033[3;90mEx: %s\033[0m\n", "", opts[i].example_case);
         }
     }
-
     printf("\n----------------------------------------------------------\n");
     printf("Report bugs to: <kyoulee@github.com>\n");
 }
