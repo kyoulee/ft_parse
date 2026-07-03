@@ -28,26 +28,30 @@ const struct parse_option *find_long_opt(const struct parse_option *opts, const 
 }
 
 
-struct parse_input *parse_input(int argc, char **argv) {
-    struct parse_input *node = malloc(sizeof(struct parse_input));
-    if (!node)
+struct parse_input_item *parse_input(int argc, char **argv) {
+    struct parse_input_item *items = calloc(argc, sizeof(struct parse_input_item));
+    int t = 0;
+    const struct parse_option *option;
+    if (!items)
 		return exit_with_error("Memory allocation failed for input node");
-    node->head = NULL;
-    node->tail = NULL;
-    const struct parse_option *option = NULL;
+    
     for (int i = 1; i < argc; i++) {
         if (!argv[i])
-            break;
+            break ;
         if (argv[i][0] == '-') {
+            t++ ;
             if (argv[i][1] == '-')
                 option = find_long_opt(options, argv[i]);
             else
                 option = find_short_opt(options, argv[i][1]);
-            if (!option)
-                    exit_with_error("wrong option \n");
-            else
-                printf("option is %s \n", option->long_opt);
+            if (!option) {
+                exit_with_error("wrong option \n");
+                return items ;
+            }
+            items[t].option = option;
+            printf("option is %s \n", option->long_opt);
         }
+        items[t].arg_count++;
     }
-    return (node);
+    return (items);
 }

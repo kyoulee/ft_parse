@@ -3,20 +3,15 @@
 
 #include "ft_parse.h"
 
-struct parse_input *parse_input(int argc, char **argv);
-
-struct parse_option_node {
-    struct parse_option* option;
+struct parse_input_item {
+    const struct parse_option* option;
     char **argv;
-    struct parse_option_node *next;
+    int arg_count;
 };
+
+struct parse_input_item *parse_input(int argc, char **argv);
 
 const struct parse_option *find_short_opt(const struct parse_option *opts, const char c);
 const struct parse_option *find_long_opt(const struct parse_option *opts, const char *name);
-
-struct parse_input {
-    struct parse_option_node *head;
-    struct parse_option_node *tail;
-};
 
 #endif
