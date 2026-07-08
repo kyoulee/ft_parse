@@ -3,7 +3,7 @@
 #include "parse_help.h"
 #include "parse_options.h"
 
-int test_parse_help(int argc, char **argv) {
+int test_parse_help(int argc, const char **argv) {
     (void)argv;
     if (argc < 2) {
         print_help(argv[0], DESCRIPTION , options);

@@ -5,11 +5,11 @@
 
 struct parse_input_item {
     const struct parse_option* option;
-    char **argv;
+    const char **argv;
     int arg_count;
 };
 
-struct parse_input_item *parse_input(int argc, char **argv);
+struct parse_input_item *parse_input(int argc, const char **argv);
 
 const struct parse_option *find_short_opt(const struct parse_option *opts, const char c);
 const struct parse_option *find_long_opt(const struct parse_option *opts, const char *name);

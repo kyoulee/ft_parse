@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "CMake: debug",
+            "type": "shell",
+            "command": "make",
+			"args": ["debug"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+			"problemMatcher": [],
+			"detail": "CMake template debug build task"
+		}
+	]
+}
