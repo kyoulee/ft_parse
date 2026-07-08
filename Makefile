@@ -1,5 +1,6 @@
 NAME        = ft_parse
 TEST_NAME   = test_suite
+DEBUG_NAME  = ft_parse_d
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 INC_DIRS    = -I include -I src -I src/help -I src/input -I src/lib -I src/options
@@ -36,12 +37,19 @@ $(NAME): $(OBJS)
 
 # 테스트 빌드 타겟
 $(TEST_NAME): $(OBJS) $(TEST_OBJS)
-	@$(CC) $(CFLAGS) $(INC_DIRS) $^ -o $@
+	@$(CC) $(CFLAGS) $(INC_DIRS) $^ -o $@ 
 	@echo "Test build complete! Running tests..."
 	@./$(TEST_NAME)
 
 test: CFLAGS += -D TEST_MODE
 test: clean $(TEST_NAME)
+
+# 디버깅 빌드 타겟
+$(DEBUG_NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(INC_DIRS) $^ -o $@
+
+debug: CFLAGS += -g
+debug: clean $(DEBUG_NAME)
 
 # .o 생성 규칙들
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
@@ -70,4 +78,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test debug

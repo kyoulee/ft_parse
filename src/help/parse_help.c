@@ -12,12 +12,13 @@ void print_help(const char *program_name, const char *descript, const struct par
     printf("\033[1mUsage:\033[0m %s [\033[4mOPTION\033[0m...]\n", program_name);
     
     if (descript) {
-        printf("\n%s\n", descript);
+        printf("\n\033[1mDESCRIPTION\033[0m\n");
+        printf("\n  %s\n", descript);
     }
 
-    printf("\n\033[1mOptions:\033[0m\n");
+    printf("\n\033[1mOptions\033[0m\n");
 
-    for (int i = 0; opts[i].long_opt != NULL; i++) {
+    for (int i = 1; opts[i].long_opt != NULL; i++) {
         char left_side[128] = {0};
         char opt_buf[64] = {0};
 

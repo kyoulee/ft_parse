@@ -2,20 +2,53 @@
 #include <stdlib.h>
 
 /* Handlers */
-void handle_help(const void *arg) {
+int handle_base(const int ac, const char **arg) {
+    (void)ac;
+    (void)arg;
+    printf("base function. ac : %d \n", ac);
+    if (!arg) {
+        printf("arg : is NULL in base! \n");
+    }
+    return ac;
+}
+
+int handle_help(const int ac, const char **arg) {
+    (void)ac;
     (void)arg;
     printf("Help requested.\n");
-    exit(0);
+
+    return ac - 1;
 }
 
-void handle_verbose(const void *arg) {
+int handle_verbose(const int ac, const char **arg) {
+    (void)ac;
     (void)arg;
     printf("Verbose mode enabled.\n");
+
+    const char **port_str = arg;
+    if (port_str) {
+        printf("Verbose set to: ");
+        for (int i = 0; i < ac ; i++)
+        {
+            printf("%s ", port_str[i]);
+        }
+    }
+    printf("\n");
+
+    return ac - 1;
 }
 
-void handle_count(const void *arg) {
-    char *port_str = (char *)arg;
+int handle_count(const int ac, const char **arg) {
+    (void)ac;
+    const char **port_str = arg;
     if (port_str) {
-        printf("count set to: %s\n", port_str);
+        printf("count set to: ");
+        for (int i = 0; i < ac ; i++)
+        {
+            printf("%s ", port_str[i]);
+        }
     }
+    printf("\n");
+
+    return ac - 2;
 }

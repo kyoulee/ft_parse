@@ -4,9 +4,10 @@
 #include "ft_parse.h"
 
 /* Handlers */
-void handle_help(const void *arg);
-void handle_verbose(const void *arg);
-void handle_count(const void *arg);
+int handle_base(const int ac, const char **arg);
+int handle_help(const int ac, const char **arg);
+int handle_verbose(const int ac, const char **arg);
+int handle_count(const int ac, const char **arg);
 
 #endif
 

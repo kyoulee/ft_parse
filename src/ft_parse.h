@@ -7,9 +7,9 @@ struct parse_option {
     const char *long_opt;     // Long option name (e.g., "verbose")
     const char *description;  // Detailed explanation of the option
     const char *example_case; // Example case for how to use
-    void (*handler)(const void *arg); // Function pointer to the handler
+    int (*handler)(const int ac, const char **arg); // Function pointer to the handler
 };
 
-int ft_parse(int argc, char **argv);
+int ft_parse(int argc, const char **argv);
 
 #endif

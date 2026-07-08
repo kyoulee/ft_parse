@@ -8,7 +8,7 @@
 /* Helper: Find option by short flag */
 const struct parse_option *find_short_opt(const struct parse_option *opts, const char c) {
     if (!opts) return NULL;
-    for (int i = 0; opts[i].short_opt != 0; i++) {
+    for (int i = 1; opts[i].short_opt != 0; i++) {
         if (opts[i].short_opt == c) {
             return &opts[i];
         }
@@ -19,7 +19,7 @@ const struct parse_option *find_short_opt(const struct parse_option *opts, const
 /* Helper: Find option by long name */
 const struct parse_option *find_long_opt(const struct parse_option *opts, const char *name) {
     if (!opts) return NULL;
-    for (int i = 0; opts[i].long_opt != NULL; i++) {
+    for (int i = 1; opts[i].long_opt != NULL; i++) {
         if (opts[i].long_opt && strcmp(opts[i].long_opt, name + 2) == 0) {
             return &opts[i];
         }
@@ -28,13 +28,13 @@ const struct parse_option *find_long_opt(const struct parse_option *opts, const 
 }
 
 
-struct parse_input_item *parse_input(int argc, char **argv) {
-    struct parse_input_item *items = calloc(argc, sizeof(struct parse_input_item));
+struct parse_input_item *parse_input(int argc, const char **argv) {
+    struct parse_input_item *items = calloc(argc, sizeof(struct parse_input_item) + 1);
     int t = 0;
     const struct parse_option *option;
     if (!items)
 		return exit_with_error("Memory allocation failed for input node");
-    
+    items[t].option = &options[0];
     for (int i = 1; i < argc; i++) {
         if (!argv[i])
             break ;
@@ -49,9 +49,13 @@ struct parse_input_item *parse_input(int argc, char **argv) {
                 return items ;
             }
             items[t].option = option;
+            items[t].argv = &argv[i];
             printf("option is %s \n", option->long_opt);
         }
         items[t].arg_count++;
+    }
+    if (items[0].arg_count) {
+        items[0].argv = &argv[1];
     }
     return (items);
 }

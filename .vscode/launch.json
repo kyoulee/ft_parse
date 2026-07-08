@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: ft_parse 디버그",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ft_parse_d",
+            "args": ["-c", "5", "--verbose", "-d"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            // "MIMode": "lldb",
+            "MIMode": "gdb",
+            "preLaunchTask": "CMake: debug"
+        }
+    ]
+}
