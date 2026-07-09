@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Handlers */
+#include "parse_help.h"
+#include "parse_options.h"
+#include "parse_color.h"
+
 int handle_base(const int ac, const char **arg) {
     (void)ac;
     (void)arg;
@@ -15,9 +18,8 @@ int handle_base(const int ac, const char **arg) {
 int handle_help(const int ac, const char **arg) {
     (void)ac;
     (void)arg;
-    printf("Help requested.\n");
-
-    return ac - 1;
+    print_help(DESCRIPTION , options, &DEFAULT_THEME);
+    return -1;
 }
 
 int handle_verbose(const int ac, const char **arg) {

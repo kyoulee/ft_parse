@@ -2,45 +2,65 @@
 #include <string.h>
 #include "parse_help.h"
 
-/**
- * @brief 명령행 옵션 도움말을 표준 출력으로 출력합니다.
- * @param program_name 프로그램 이름
- * @param descript 프로그램 상세 설명
- * @param opts 옵션 정보 배열
- */
-void print_help(const char *program_name, const char *descript, const struct parse_option *opts) {
-    printf("\033[1mUsage:\033[0m %s [\033[4mOPTION\033[0m...]\n", program_name);
-    
-    if (descript) {
-        printf("\n\033[1mDESCRIPTION\033[0m\n");
-        printf("\n  %s\n", descript);
-    }
+void print_Usage(const char *program_name, const struct parse_theme *theme) {
+    if (!program_name)
+        return;
+    printf("%sUsage%s\n",theme->label, theme->reset);
+    printf("  %s [%sOPTION%s...]\n", program_name, theme->option, theme->reset);
+}
 
-    printf("\n\033[1mOptions\033[0m\n");
+void print_description(const char *descript, const struct parse_theme *theme) {
+    if (!descript)
+        return;
+    printf("\n%sDESCRIPTION%s\n", theme->label, theme->reset);
+    printf("  %s\n", descript);
+}
 
+void print_options(const struct parse_option *opts ,const struct parse_theme *theme) {
+    if (!opts)
+        return;
+    printf("\n%sOptions%s\n", theme->label, theme->reset);
     for (int i = 1; opts[i].long_opt != NULL; i++) {
         char left_side[128] = {0};
         char opt_buf[64] = {0};
 
         if (opts[i].short_opt) {
-            sprintf(left_side, "  -%c, ", opts[i].short_opt);
+            snprintf(left_side, sizeof(left_side), "  -%c, ", opts[i].short_opt);
         } else {
-            sprintf(left_side, "      ");
+            snprintf(left_side, sizeof(left_side), "      ");
         }
 
         if (opts[i].long_opt) {
-            sprintf(opt_buf, "--%s=%s", opts[i].long_opt, opts[i].long_opt);
+            snprintf(opt_buf, sizeof(opt_buf), "--%s", opts[i].long_opt);
         } else {
-            sprintf(opt_buf, "--%s", opts[i].long_opt);
+            snprintf(opt_buf, sizeof(opt_buf), "--(unknown)");
         }
-        strcat(left_side, opt_buf);
-
-        printf("%-30s %s\n", left_side, opts[i].description);
+        
+        strncat(left_side, opt_buf, sizeof(left_side) - strlen(left_side) - 1);
+        
+        printf("%s%-30s%s %s%s%s\n", 
+               theme->option, left_side, theme->reset,
+               theme->desc, opts[i].description ? opts[i].description : "", theme->reset);
 
         if (opts[i].example_case) {
-            printf("%-32s \033[3;90mEx: %s\033[0m\n", "", opts[i].example_case);
+            printf("%-32s %sEx: %s%s\n", 
+                   "", theme->example, opts[i].example_case, theme->reset);
         }
     }
+}
+
+void print_help(const char *descript, const struct parse_option *opts, const struct parse_theme *theme) 
+{
+    if (!opts || !theme) {
+        printf("NO Help option\n");
+        return ;
+    }
+    extern char *program_invocation_short_name;
+
+    print_Usage(program_invocation_short_name, theme);
+    print_description(descript, theme);
+    print_options(opts,theme);
+
     printf("\n----------------------------------------------------------\n");
     printf("Report bugs to: <kyoulee@github.com>\n");
 }

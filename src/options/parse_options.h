@@ -1,18 +1,29 @@
 #ifndef PARSE_OPTIONS_T_H
-#define PARSE_OPTIONS_T_H
+# define PARSE_OPTIONS_T_H
 
 #include <stddef.h>
 #include "ft_parse.h"
-#include "parse_options_handle.h"
+#include "parse_options_handler.h"
 
+/**
+ * @def DESCRIPTION
+ * @brief Template program identification string. 
+ * @note Replace this string with your specific application name and description.
+ */
 #define DESCRIPTION "FT_PING: A custom ping utility inspired by GNU inetutils."
 
 /**
- * @brief 옵션 데이터 정의
- * @details 
- * 배열의 첫번때는 기본 실행 함수가 있어야합니다.
- * 첫 기본 배열을 제외한 short 와 long에 대한 인자는 필수 인자입니다.
- * 배열의 마지막은 반드시 NULL과 0으로 끝나는 Sentinel 노드여야 합니다.
+ * @brief Example layout array defining supported command-line options.
+ *
+ * @details
+ * This static array serves as a template for users configuring the ft_parse library.
+ * To customize for your own application, modify the elements while maintaining these invariants:
+ * - **Index 0 (Baseline Handler):** Reserved for positional non-option arguments 
+ * (e.g., target hostnames). Flags (`short_opt`, `long_opt`) must be null/0.
+ * - **Indices 1 to N-2 (Standard Options):** Explicit option flags. Both 
+ * `short_opt` and `long_opt` are required for proper token mapping.
+ * - **Index N-1 (Sentinel Node):** The array must be explicitly terminated 
+ * with an empty structure `{0, NULL, NULL, NULL, NULL}` to safe-guard loop boundaries.
  */
 static const struct parse_option options[] = {
     {0, NULL, NULL, "send ICMP ECHO_REQUEST to network hosts", handle_base},
