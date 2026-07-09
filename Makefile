@@ -26,7 +26,6 @@ SRCS        = $(SRC_DIR)/main.c \
               $(HELP_DIR)/parse_help.c \
               $(INPUT_DIR)/parse_input.c \
               $(LIB_DIR)/parse_color.c \
-              $(LIB_DIR)/parse_error.c \
               $(OPTIONS_DIR)/parse_options_handle.c
 
 TEST_SRCS   = $(SRC_DIR)/main.t.c \
