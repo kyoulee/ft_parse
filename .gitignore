@@ -58,3 +58,4 @@ dkms.conf
 *.log
 ft_parse
 ft_parse_d
+ft_parse_t

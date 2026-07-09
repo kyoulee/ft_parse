@@ -10,7 +10,7 @@
  */
 void print_help(const char *program_name, const char *descript, const struct parse_option *opts) {
     printf("\033[1mUsage:\033[0m %s [\033[4mOPTION\033[0m...]\n", program_name);
-    
+
     if (descript) {
         printf("\n\033[1mDESCRIPTION\033[0m\n");
         printf("\n  %s\n", descript);
@@ -34,7 +34,6 @@ void print_help(const char *program_name, const char *descript, const struct par
             sprintf(opt_buf, "--%s", opts[i].long_opt);
         }
         strcat(left_side, opt_buf);
-
         printf("%-30s %s\n", left_side, opts[i].description);
 
         if (opts[i].example_case) {
