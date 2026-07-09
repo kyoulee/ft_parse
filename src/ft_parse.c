@@ -1,8 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "ft_parse.h"
 #include "parse_input.h"
 #include "parse_options.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int ft_parse(int argc, const char **argv) {
     struct parse_input_item *parse_items = parse_input(argc, argv);

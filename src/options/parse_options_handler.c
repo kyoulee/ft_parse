@@ -5,7 +5,6 @@
 #include "parse_options.h"
 #include "parse_color.h"
 
-/* Handlers */
 int handle_base(const int ac, const char **arg) {
     (void)ac;
     (void)arg;
