@@ -24,7 +24,7 @@ int ft_parse(int argc, const char **argv) {
             );
             if (remainder) {
                 if (remainder < 0 ) {
-                    printf("option input is not enough for option [%s] \n", parse_items[i].option->long_opt);
+                    printf("option [%s] is return %d stop program \n", parse_items[i].option->long_opt, remainder);
                     free(parse_items);
                     return 2;
                 }

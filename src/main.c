@@ -2,8 +2,5 @@
 
 int main(int ac, const char **av)
 {
-    (void)ac;
-    (void)av;
-    ft_parse(ac,av);
-    return (0);
+    return (ft_parse(ac,av));
 }

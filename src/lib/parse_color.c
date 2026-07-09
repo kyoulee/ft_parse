@@ -1,13 +1,9 @@
-//
-// Created by kyoulee on 26. 1. 27..
-//
-
 #include "parse_color.h"
 
-static const struct parse_theme DEFAULT_THEME = {
+const struct parse_theme DEFAULT_THEME = {
     .label = BOLD,
-    .option = UNDERLINE,
+    .option = RESET,
     .desc = RESET,
-    .example = ITALIC ,
+    .example = BRIGHT_BLACK ,
     .reset = RESET
 };
