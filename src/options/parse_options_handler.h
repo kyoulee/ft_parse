@@ -4,7 +4,6 @@
 #include "ft_parse.h"
 
 /**
- * @file parse_options_handler_example.h
  * @brief Template declarations for command-line option callback handlers.
  *
  * @details
@@ -22,21 +21,21 @@
 /**
  * @brief Baseline handler executed for remaining positional arguments (e.g., target host).
  */
-int handle_base(const int ac, const char **arg);
+int handle_base(const int ac, const char **arg, const struct parse_option options[]);
 
 /**
  * @brief Execution handler triggered by the help option.
  */
-int handle_help(const int ac, const char **arg);
+int handle_help(const int ac, const char **arg, const struct parse_option options[]);
 
 /**
  * @brief Execution handler triggered by the verbose option.
  */
-int handle_verbose(const int ac, const char **arg);
+int handle_verbose(const int ac, const char **arg, const struct parse_option options[]);
 
 /**
  * @brief Execution handler triggered by the count option.
  */
-int handle_count(const int ac, const char **arg);
+int handle_count(const int ac, const char **arg, const struct parse_option options[]);
 
 #endif

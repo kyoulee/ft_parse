@@ -9,8 +9,9 @@
  * @def DESCRIPTION
  * @brief Template program identification string. 
  * @note Replace this string with your specific application name and description.
+ * @deprecated This macro/variable has been commented out and is no longer used.
  */
-#define DESCRIPTION "FT_PING: A custom ping utility inspired by GNU inetutils."
+// #define DESCRIPTION = "FT_PING: A custom ping utility inspired by GNU inetutils.";
 
 /**
  * @brief Example layout array defining supported command-line options.
@@ -25,13 +26,13 @@
  * - **Index N-1 (Sentinel Node):** The array must be explicitly terminated 
  * with an empty structure `{0, NULL, NULL, NULL, NULL}` to safe-guard loop boundaries.
  */
-static const struct parse_option options[] = {
-    {0, NULL, NULL, "send ICMP ECHO_REQUEST to network hosts", handle_base},
-    {'v', "verbose", "Produce verbose output", NULL, handle_verbose},
-    {'c', "count",  "Stop after sending NUMBER packets", "ping -c 5 google.com", handle_count},
-    {'d', "debug", "Enable debug mode with extra logs", "ping --debug", NULL},
-    {'h', "help",  "Give this help list", "ping --help", handle_help},
-    {0, NULL, NULL, NULL, NULL}
-};
+// static const struct parse_option options[] = {
+//     {0, NULL, NULL, "send ICMP ECHO_REQUEST to network hosts", handle_base},
+//     {'v', "verbose", "Produce verbose output", NULL, handle_verbose},
+//     {'c', "count",  "Stop after sending NUMBER packets", "ping -c 5 google.com", handle_count},
+//     {'d', "debug", "Enable debug mode with extra logs", "ping --debug", NULL},
+//     {'h', "help",  "Give this help list", "ping --help", handle_help},
+//     {0, NULL, NULL, NULL, NULL}
+// };
 
 #endif

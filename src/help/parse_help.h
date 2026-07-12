@@ -31,6 +31,6 @@ void print_options(const struct parse_option *opts, const struct parse_theme *th
  * @param[in] opts          Pointer to the parse_option array.
  * @param[in] theme         Color theme configuration.
  */
-void print_help(const char *descript, const struct parse_option *opts, const struct parse_theme *theme);
+void print_help(const struct parse_option *opts, const struct parse_theme *theme);
 
 #endif  // PARSE_HELP_H_

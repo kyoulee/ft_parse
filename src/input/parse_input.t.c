@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int test_parse_input(int argc, const char **argv) {
+int test_parse_input(int argc, const char **argv, const struct parse_option options[] ) {
     printf("[TEST] Starting parse_input unit test...\n");
 
-    struct parse_input_item *parse_items = parse_input(argc, argv);
+    struct parse_input_item *parse_items = parse_input(argc, argv, options);
     
     if (!parse_items) {
         printf("[FAIL] parse_input returned NULL pointer.\n");

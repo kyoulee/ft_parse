@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include "ft_parse.h"
 #include "parse_input.h"
-#include "parse_options.h"
 
-int ft_parse(int argc, const char **argv) {
-    struct parse_input_item *parse_items = parse_input(argc, argv);
+int ft_parse(int argc, const char **argv, const struct parse_option options[]) {
+    struct parse_input_item *parse_items = parse_input(argc, argv, options);
     int remainder = 0;
 
     if (!parse_items)
@@ -20,7 +19,8 @@ int ft_parse(int argc, const char **argv) {
         }
         remainder = parse_items[i].option->handler(
             parse_items[i].arg_count,
-            parse_items[i].argv
+            parse_items[i].argv,
+            options
         );
         if (remainder) {
             if (remainder < 0 ) {
@@ -41,7 +41,8 @@ int ft_parse(int argc, const char **argv) {
     }
     parse_items[0].option->handler(
         parse_items[0].arg_count,
-        parse_items[0].argv
+        parse_items[0].argv,
+        options
     );
 
     free(parse_items);

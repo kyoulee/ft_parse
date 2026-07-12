@@ -15,9 +15,10 @@ struct parse_option {
      * @brief Callback function pointer executed when the option is matched.
      * @param[in] ac   The argument count associated with this option.
      * @param[in] arg  The array of argument strings for this option.
+     * @param[in] options  Pointer to the contiguous array of parsing options, terminated by a sentinel node.
      * @return int     Remaining positional arguments, 0 on success, or negative on fatal error.
      */
-    int (*handler)(const int ac, const char **arg);
+    int (*handler)(const int ac, const char **arg, const struct parse_option *options);
 };
 
 /**
@@ -29,11 +30,12 @@ struct parse_option {
  *
  * @param[in] argc  Argument count from the program main entry point.
  * @param[in] argv  Array of argument strings from the program main entry point.
+ * @param[in] options  Pointer to the contiguous array of parsing options, terminated by a sentinel node.
  * @return int      Returns 0 on complete parsing success,
  * 1 if the baseline handler is missing,
  * 2 on a fatal option handler error, or
  * -1 on initial memory allocation failure.
  */
-int ft_parse(int argc, const char **argv);
+int ft_parse(int argc, const char **argv, const struct parse_option options[]);
 
 #endif

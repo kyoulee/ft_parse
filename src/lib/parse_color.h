@@ -52,6 +52,6 @@ struct parse_theme {
     char *reset;      /**< The default reset sequence to close styled blocks. */
 };
 
-extern const struct parse_theme DEFAULT_THEME;
+extern const struct parse_theme PARSE_DEFAULT_THEME;
 
 #endif

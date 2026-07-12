@@ -11,8 +11,9 @@
  *
  * @param[in] argc  Argument count (typically matching argc from main).
  * @param[in] argv  Array of argument strings (typically matching argv from main).
+ * @param[in] options  Pointer to the contiguous array of parsing options, terminated by a sentinel node.
  * @return int      Returns 0 on all tests passing, or -1 if any validation fails.
  */
-int test_parse_input(int argc, const char **argv);
+int test_parse_input(int argc, const char **argv, const struct parse_option options[] );
 
-#endif  // FT_PARSE_PARSE_INPUT_T_H
+#endif

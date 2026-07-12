@@ -24,7 +24,7 @@ const struct parse_option *find_long_opt(const struct parse_option *opts, const 
     return NULL;
 }
 
-struct parse_input_item *parse_input(int argc, const char **argv) {
+struct parse_input_item *parse_input(int argc, const char **argv, const struct parse_option options[]) {
     struct parse_input_item *items = calloc(argc, sizeof(struct parse_input_item) + 1);
     int t = 0;
     const struct parse_option *option;
@@ -43,7 +43,7 @@ struct parse_input_item *parse_input(int argc, const char **argv) {
             else
                 option = find_short_opt(options, argv[i][1]);
             if (!option) {
-                print_help(DESCRIPTION, options, &DEFAULT_THEME);
+                print_help(options, &PARSE_DEFAULT_THEME);
                 return NULL;
             }
             items[t].option = option;

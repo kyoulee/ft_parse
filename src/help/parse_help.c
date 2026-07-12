@@ -49,7 +49,7 @@ void print_options(const struct parse_option *opts ,const struct parse_theme *th
     }
 }
 
-void print_help(const char *descript, const struct parse_option *opts, const struct parse_theme *theme) 
+void print_help(const struct parse_option *opts, const struct parse_theme *theme) 
 {
     if (!opts || !theme) {
         printf("NO Help option\n");
@@ -58,7 +58,7 @@ void print_help(const char *descript, const struct parse_option *opts, const str
     extern char *program_invocation_short_name;
 
     print_Usage(program_invocation_short_name, theme);
-    print_description(descript, theme);
+    print_description(opts[0].description, theme);
     print_options(opts,theme);
 
     printf("\n----------------------------------------------------------\n");

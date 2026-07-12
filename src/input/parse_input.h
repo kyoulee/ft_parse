@@ -2,7 +2,6 @@
 # define FT_PARSE_PARSE_INPUT_H
 
 #include "ft_parse.h"
-#include "parse_options.h"
 
 /**
  * @struct parse_input_item
@@ -35,11 +34,12 @@ const struct parse_option *find_long_opt(const struct parse_option *opts, const 
  * @brief Parses command-line arguments and maps them to their respective options.
  * @param[in] argc       Argument count from the main entry point.
  * @param[in] argv       Array of argument strings from the main entry point.
+ * @param[in] options  Pointer to the contiguous array of parsing options, terminated by a sentinel node.
  * @return struct parse_input_item* Dynamic array of parsed items, or NULL on memory allocation failure.
  * @note 
  * - The returned array is dynamically allocated and contains structured groups of options and arguments.
  * - Enforces rigorous error handling; terminates or reports error if an invalid option is encountered.
  */
-struct parse_input_item *parse_input(int argc, const char **argv);
+struct parse_input_item *parse_input(int argc, const char **argv, const struct parse_option options[]);
 
 #endif
