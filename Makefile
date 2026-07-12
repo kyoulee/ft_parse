@@ -3,15 +3,19 @@
 #
 # This Makefile manages:
 #  - Production Binary : $(NAME)
+#  - Archiver Library  : $(AR_NAME)
 #  - Debug Binary      : $(DEBUG_NAME)
 #  - Unit Test Suite   : $(TEST_NAME)
 ################################################################################
 
 NAME        = ft_parse
+AR_NAME     = ft_parse.a
 TEST_NAME   = ft_parse_t
 DEBUG_NAME  = ft_parse_d
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
+AR          = ar
+ARFLAGS     = rcs
 INC_DIRS    = -I include -I src -I src/help -I src/input -I src/lib -I src/options
 
 SRC_DIR     = src
@@ -25,12 +29,13 @@ SRCS        = $(SRC_DIR)/main.c \
               $(SRC_DIR)/ft_parse.c \
               $(HELP_DIR)/parse_help.c \
               $(INPUT_DIR)/parse_input.c \
-              $(LIB_DIR)/parse_color.c \
-              $(OPTIONS_DIR)/parse_options_handler.c
+              $(LIB_DIR)/parse_color.c
+              
 
 TEST_SRCS   = $(SRC_DIR)/main.t.c \
               $(HELP_DIR)/parse_help.t.c \
-              $(INPUT_DIR)/parse_input.t.c
+              $(INPUT_DIR)/parse_input.t.c \
+			  $(OPTIONS_DIR)/parse_options_handler.c
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 TEST_OBJS   = $(addprefix $(OBJ_DIR)/, $(notdir $(TEST_SRCS:.c=.o)))
@@ -73,6 +78,21 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INC_DIRS) $^ -o $@
+	@echo "[SUCCESS] Production build standard sequence complete: $@"
+
+################################################################################
+# STEP: Static Library Archiver Configuration
+#
+# This section handles:
+#  - Archiving object files into a standalone static library (.a).
+#  - Filtering out the main object to ensure safe modular integration.
+################################################################################
+
+archiver: CFLAGS += -g
+archiver: clean $(AR_NAME)
+
+$(AR_NAME): $(OBJS_NO_MAIN)
+	@$(AR) $(ARFLAGS) $@ $^
 	@echo "[SUCCESS] Production build standard sequence complete: $@"
 
 ################################################################################
@@ -120,9 +140,9 @@ clean:
 	@echo "[CLEAN] Removed intermediate object files directory."
 
 fclean: clean
-	@$(RM) $(NAME) $(TEST_NAME) $(DEBUG_NAME)
+	@$(RM) $(NAME) $(AR_NAME) $(TEST_NAME) $(DEBUG_NAME) 
 	@echo "[FCLEAN] Purged all generated execution binaries."
 
 re: fclean all
 
-.PHONY: all test debug clean fclean re
+.PHONY: all archiver test debug clean fclean re
