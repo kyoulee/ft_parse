@@ -7,9 +7,10 @@
 /**
  * @brief Prints the program usage block.
  * @param[in] program_name  The name of the executable.
+ * @param[in] opts          Pointer to the parse_option array.
  * @param[in] theme         Color theme configuration.
  */
-void print_Usage(const char *program_name, const struct parse_theme *theme);
+void print_Usage(const char *program_name, const struct parse_option *opts, const struct parse_theme *theme);
 
 /**
  * @brief Prints the program description block.

@@ -2,11 +2,16 @@
 #include <string.h>
 #include "parse_help.h"
 
-void print_Usage(const char *program_name, const struct parse_theme *theme) {
+void print_Usage(const char *program_name, const struct parse_option *opts, const struct parse_theme *theme) {
     if (!program_name)
         return;
     printf("%sUsage%s\n",theme->label, theme->reset);
-    printf("  %s [%sOPTION%s...]\n", program_name, theme->option, theme->reset);
+    if (!opts) {
+        printf("  %s [%sOPTION%s...]\n", program_name, theme->option, theme->reset);
+        return;
+    }
+    printf("  %s %s%s%s\n", program_name, theme->option, opts[0].example_case ? opts[0].example_case : "[OPTION...]", theme->reset);
+    
 }
 
 void print_description(const char *descript, const struct parse_theme *theme) {
@@ -57,7 +62,7 @@ void print_help(const struct parse_option *opts, const struct parse_theme *theme
     }
     extern char *program_invocation_short_name;
 
-    print_Usage(program_invocation_short_name, theme);
+    print_Usage(program_invocation_short_name, opts, theme);
     print_description(opts[0].description, theme);
     print_options(opts,theme);
 

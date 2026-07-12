@@ -23,7 +23,7 @@ int main(int ac, const char **av)
 {
     // Define your custom CLI options layout
     const struct parse_option options[] = {
-        {0, NULL, NULL, "send ICMP ECHO_REQUEST to network hosts", handle_base},
+        {0, NULL, "send ICMP ECHO_REQUEST to network hosts", "[options] <destination>", handle_base},
         {'v', "verbose", "Produce verbose output", NULL, handle_verbose},
         {'c', "count",   "Stop after sending NUMBER packets", "ping -c 5 google.com", handle_count},
         {'d', "debug",   "Enable debug mode with extra logs", "ping --debug", NULL},
@@ -90,7 +90,7 @@ If unmapped variables or illegal operational options are provided, the system ov
 ```sh
 $ ./test_parser -x 
 Usage
-  test_parser [OPTION...]
+  test_parser [options] <destination>
 
 DESCRIPTION
   Baseline infrastructure layer
